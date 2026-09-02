@@ -12,10 +12,14 @@
   </script>
   <!-- End Google tag -->
 
+  <!-- OpenAI pixel -->
+  <script>!function(w,d,s,u){if(w.oaiq)return;var q=function(){q.q.push(arguments)};q.q=[];w.oaiq=q;var j=d.createElement(s);j.async=1;j.src=u;var f=d.getElementsByTagName(s)[0];f.parentNode.insertBefore(j,f)}(window,document,"script","https://bzrcdn.openai.com/sdk/oaiq.min.js");oaiq("init",{pixelId:"NkSBZXnfcpSjv8x6miWzD5",debug:true});</script>
+  <!-- End OpenAI pixel -->
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sistema Gestacars — Consultoría gratuita para compraventas</title>
-  <meta name="description" content="Deja de depender de portales para vender. Agenda una consultoría gratuita de 30 minutos y te enseñamos el sistema que usan las compraventa que captan clientes desde redes sociales.">
+  <meta name="description" content="Deja de depender de portales para vender. Déjanos tus datos y te contactamos para analizar tu caso concreto y enseñarte el sistema que usan las compraventa que captan clientes desde redes sociales.">
 
   <!-- Meta Pixel Code -->
   <script>
@@ -37,10 +41,6 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
-
-  <!-- Calendly -->
-  <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
-  <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
 
   <style>
     *{box-sizing:border-box;margin:0;padding:0}
@@ -117,6 +117,56 @@
     .btn:focus-visible{outline:2px solid var(--white);outline-offset:3px}
     .cta-trust{
       font-size:11px;color:#555;text-align:center;margin-top:12px;
+    }
+
+    /* FORMULARIO */
+    .form-field{margin-bottom:12px}
+    .form-field label{
+      display:block;font-size:11px;text-transform:uppercase;
+      letter-spacing:0.8px;color:#777;margin-bottom:5px;
+    }
+    .form-field input{
+      width:100%;background:#0f0f0f;border:1px solid var(--border);
+      border-radius:8px;padding:13px 14px;color:var(--white);
+      font-family:'DM Sans',sans-serif;font-size:15px;
+    }
+    .form-field input::placeholder{color:#4a4a4a}
+    .form-field input:focus{outline:none;border-color:var(--accent)}
+    .form-field input:invalid:not(:placeholder-shown){border-color:var(--red)}
+    .hp{position:absolute;left:-9999px;opacity:0;height:0;width:0}
+    .form-msg{
+      font-size:13px;text-align:center;margin-top:12px;line-height:1.5;
+      display:none;
+    }
+    .form-msg.error{display:block;color:var(--red)}
+    .form-ok{
+      display:none;text-align:center;padding:14px 4px;
+    }
+    .form-ok.show{display:block}
+    .form-ok .tick{
+      font-size:34px;color:var(--accent);line-height:1;margin-bottom:10px;
+    }
+    .form-ok strong{
+      display:block;font-family:'Bebas Neue',sans-serif;font-size:22px;
+      letter-spacing:0.5px;color:var(--white);margin-bottom:6px;
+    }
+    .form-ok p{font-size:13.5px;color:#999;line-height:1.5}
+    .btn[disabled]{opacity:0.55;cursor:default}
+
+    /* BURBUJA WHATSAPP */
+    .wa-float{
+      position:fixed;right:16px;bottom:16px;z-index:999;
+      display:flex;align-items:center;gap:9px;
+      background:#25D366;color:#0a0a0a;text-decoration:none;
+      border-radius:999px;padding:11px 17px 11px 13px;
+      font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;
+      box-shadow:0 8px 26px rgba(0,0,0,0.45);
+      transition:transform 0.18s;
+    }
+    .wa-float:hover{transform:translateY(-2px)}
+    .wa-float svg{width:22px;height:22px;flex-shrink:0}
+    @media (max-width:400px){
+      .wa-float{font-size:13px;padding:10px 14px 10px 11px}
     }
 
     /* PROOF BAR */
@@ -241,19 +291,43 @@
       <h1>Deja de depender<br>de <span>portales</span><br>para vender</h1>
       <p class="subhead">En 30 minutos analizamos tu compraventa y te enseñamos el sistema que usan los que captan clientes desde redes sociales.</p>
 
-      <div class="cta-card">
-        <div class="cta-card-title">Agenda tu <span>consultoría gratuita</span></div>
-        <p class="cta-card-sub">30 minutos por videollamada · Sin compromiso</p>
+      <div class="cta-card" id="formulario">
+        <div class="cta-card-title">Cuéntanos tu <span>caso concreto</span></div>
+        <p class="cta-card-sub">Rellena el formulario y te contactamos para ayudarte</p>
         <ul class="cta-list">
           <li>Revisamos de dónde salen hoy tus clientes y cuánto te cuesta cada uno.</li>
           <li>Te enseñamos el sistema completo aplicado a tu compraventa.</li>
           <li>Sales con un plan claro para los próximos 90 días, trabajes con nosotros o no.</li>
         </ul>
-        <a href="https://calendly.com/info-gestacars/30min"
-           class="btn"
-           data-calendly
-           target="_blank" rel="noopener">Agendar mi llamada gratuita</a>
-        <p class="cta-trust">Plazas limitadas cada semana · Sin compromiso</p>
+
+        <form id="lead-form" novalidate>
+          <div class="form-field">
+            <label for="nombre">Nombre completo</label>
+            <input type="text" id="nombre" name="nombre" placeholder="Tu nombre y apellidos"
+                   autocomplete="name" required>
+          </div>
+          <div class="form-field">
+            <label for="telefono">Teléfono</label>
+            <input type="tel" id="telefono" name="telefono" placeholder="600 000 000"
+                   autocomplete="tel" inputmode="tel" required>
+          </div>
+          <div class="form-field">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="tucorreo@ejemplo.com"
+                   autocomplete="email" required>
+          </div>
+          <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off">
+          <button type="submit" class="btn" id="lead-submit">Quiero que me contacten</button>
+          <p class="form-msg" id="form-msg"></p>
+        </form>
+
+        <div class="form-ok" id="form-ok">
+          <div class="tick">✓</div>
+          <strong>¡Perfecto! Formulario enviado</strong>
+          <p>Hemos recibido tus datos correctamente. Te contactamos en menos de 24 h para analizar tu caso. Si lo prefieres, escríbenos ya por WhatsApp y hablamos ahora mismo.</p>
+        </div>
+
+        <p class="cta-trust">Sin compromiso · No compartimos tus datos con nadie</p>
       </div>
     </div>
   </div>
@@ -356,48 +430,141 @@
           </div>
         </div>
       </div>
-      <p class="note">La llamada es gratuita y solo la hacemos con compraventa que venden vehículos de forma habitual. Si vemos que no es tu caso, te lo decimos en los primeros minutos.</p>
+      <p class="note">La consultoría es gratuita y solo la hacemos con compraventa que venden vehículos de forma habitual. Si vemos que no es tu caso, te lo decimos en los primeros minutos.</p>
     </div>
   </div>
 
   <!-- CTA FINAL -->
   <div class="cta-final">
     <div class="cta-inner">
-      <h2>Reserva tu hueco</h2>
-      <p>Si te has reconocido en lo que acabas de leer, elige el día y la hora que mejor te venga.</p>
-      <a href="https://calendly.com/info-gestacars/30min"
-         class="btn"
-         data-calendly
-         target="_blank" rel="noopener">Agendar mi llamada gratuita</a>
-      <p class="cta-trust">30 minutos · Por videollamada · Sin compromiso</p>
+      <h2>Cuéntanos tu caso</h2>
+      <p>Si te has reconocido en lo que acabas de leer, déjanos tus datos y te contactamos.</p>
+      <a href="#formulario" class="btn" data-ir-form>Quiero que me contacten</a>
+      <p class="cta-trust">Te llamamos en menos de 24 h · Sin compromiso</p>
     </div>
   </div>
 
   <div class="footer-strip">Sistema Gestacars · Compraventa de vehículos</div>
 
-  <script>
-    // URL de Calendly en un solo sitio
-    var CALENDLY_URL = 'https://calendly.com/info-gestacars/30min';
-    // Página de gracias (ajústala a tu ruta real si es distinta)
-    var GRACIAS_URL = '/gracias.html';
+  <!-- BURBUJA WHATSAPP -->
+  <a class="wa-float" id="wa-float" href="#" target="_blank" rel="noopener" aria-label="Escribir por WhatsApp">
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M17.47 14.38c-.3-.15-1.75-.86-2.02-.96-.27-.1-.47-.15-.67.15-.2.3-.77.96-.94 1.16-.17.2-.35.22-.64.07-.3-.15-1.25-.46-2.38-1.47-.88-.78-1.47-1.75-1.65-2.05-.17-.3-.02-.46.13-.6.14-.14.3-.35.45-.53.15-.18.2-.3.3-.5.1-.2.05-.38-.02-.53-.08-.15-.67-1.6-.92-2.2-.24-.58-.49-.5-.67-.5h-.57c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.22 3.08c.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.69.63.71.22 1.36.19 1.87.12.57-.09 1.75-.72 2-1.41.25-.7.25-1.29.17-1.41-.07-.13-.27-.2-.57-.35z"/>
+      <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.86 9.86 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm0 18.13h-.01c-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.36c0-4.54 3.7-8.23 8.25-8.23 2.2 0 4.27.86 5.83 2.41a8.19 8.19 0 0 1 2.41 5.83c0 4.54-3.7 8.23-8.23 8.23z"/>
+    </svg>
+    <span>Quiero saber más</span>
+  </a>
 
-    // Abrir Calendly en popup (si el script no carga, el enlace funciona igual)
-    document.querySelectorAll('[data-calendly]').forEach(function (el) {
+  <script>
+    /* ─────────────────────────────────────────────────────────
+       CONFIGURACIÓN — cambia solo estas dos líneas
+       ───────────────────────────────────────────────────────── */
+    var EMAIL_DESTINO = 'info.gestacars@gmail.com';  // a donde llegan los leads
+    var WHATSAPP_NUM  = '34674485009';               // con prefijo, sin + ni espacios
+    var WHATSAPP_MSG  = 'Hola, quiero saber más sobre el sistema para captar clientes en mi compraventa.';
+
+    /* ── Burbuja de WhatsApp ── */
+    var wa = document.getElementById('wa-float');
+    wa.href = 'https://wa.me/' + WHATSAPP_NUM + '?text=' + encodeURIComponent(WHATSAPP_MSG);
+    wa.addEventListener('click', function () {
+      if (window.fbq) fbq('trackCustom', 'ClicWhatsApp');
+      if (window.gtag) gtag('event', 'clic_whatsapp');
+    });
+
+    /* ── Botón del CTA final: baja al formulario ── */
+    document.querySelectorAll('[data-ir-form]').forEach(function (el) {
       el.addEventListener('click', function (e) {
-        if (window.Calendly) {
-          e.preventDefault();
-          Calendly.initPopupWidget({ url: CALENDLY_URL });
-        }
+        e.preventDefault();
+        document.getElementById('formulario').scrollIntoView({ behavior: 'smooth', block: 'center' });
+        setTimeout(function () { document.getElementById('nombre').focus(); }, 500);
       });
     });
 
-    // Cuando el usuario agenda, lo mandamos a la página de gracias
-    window.addEventListener('message', function (e) {
-      if (typeof e.origin !== 'string' || e.origin.indexOf('calendly.com') === -1) return;
-      if (e.data && e.data.event === 'calendly.event_scheduled') {
-        window.location.href = GRACIAS_URL;
+    /* ── Envío del formulario ── */
+    var form = document.getElementById('lead-form');
+    var boton = document.getElementById('lead-submit');
+    var msg = document.getElementById('form-msg');
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      msg.className = 'form-msg';
+      msg.textContent = '';
+
+      var nombre = form.nombre.value.trim();
+      var telefono = form.telefono.value.trim();
+      var email = form.email.value.trim();
+
+      if (!nombre || !telefono || !email) {
+        return error('Rellena los tres campos para que podamos contactarte.');
+      }
+      if (telefono.replace(/\D/g, '').length < 9) {
+        return error('Revisa el teléfono, parece que falta algún dígito.');
+      }
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        return error('Revisa el email, no parece correcto.');
+      }
+
+      boton.disabled = true;
+      boton.textContent = 'Enviando...';
+
+      fetch('https://formsubmit.co/ajax/' + EMAIL_DESTINO, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          _subject: 'Nuevo lead Gestacars: ' + nombre,
+          _template: 'table',
+          _captcha: 'false',
+          Nombre: nombre,
+          Telefono: telefono,
+          Email: email,
+          Origen: window.location.href
+        })
+      })
+      .then(function (r) { return r.json(); })
+      .then(function (data) {
+        if (data.success === true || data.success === 'true') {
+          form.style.display = 'none';
+          document.getElementById('form-ok').classList.add('show');
+          trackLead();
+        } else {
+          throw new Error(data.message || 'error');
+        }
+      })
+      .catch(function () {
+        boton.disabled = false;
+        boton.textContent = 'Quiero que me contacten';
+        error('No hemos podido enviar el formulario. Escríbenos por WhatsApp y lo resolvemos al momento.');
+      });
+
+      function error(texto) {
+        msg.className = 'form-msg error';
+        msg.textContent = texto;
+        boton.disabled = false;
+        boton.textContent = 'Quiero que me contacten';
       }
     });
+
+    /* ── Conversión: lead recibido (una vez por sesión) ── */
+    function trackLead() {
+      try {
+        if (sessionStorage.getItem('lead_enviado')) return;
+        sessionStorage.setItem('lead_enviado', '1');
+      } catch (err) {}
+
+      if (window.oaiq) {
+        oaiq(
+          "measure",
+          "registration_completed",
+          { type: "customer_action" }
+        );
+      }
+      if (window.fbq) {
+        fbq('track', 'Lead');
+      }
+      if (window.gtag) {
+        gtag('event', 'generate_lead');
+      }
+    }
   </script>
 
 </body>
