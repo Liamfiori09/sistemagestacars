@@ -131,6 +131,8 @@ h1{
 form{margin-top:20px;display:grid;gap:13px}
 .row{display:grid;grid-template-columns:1fr 1fr;gap:11px}
 label{display:block;font-size:.83rem;font-weight:500;margin-bottom:5px}
+.opt{font-weight:400;color:var(--ink-soft);font-size:.78rem}
+textarea{resize:vertical;min-height:70px;line-height:1.45}
 input,select,textarea{
   width:100%;
   font-family:inherit;
@@ -322,6 +324,14 @@ footer a{color:var(--ink-soft)}
               <option>Sin ITV en vigor</option>
             </select>
           </div>
+          <div>
+            <label for="precio">¿Cuánto pides por él?</label>
+            <input type="text" id="precio" name="precio" inputmode="numeric" placeholder="3.500 €" required>
+          </div>
+          <div>
+            <label for="averia">Si tiene alguna avería, cuéntanos cuál <span class="opt">opcional</span></label>
+            <textarea id="averia" name="averia" rows="3" placeholder="Embrague patina, testigo del motor encendido…"></textarea>
+          </div>
           <button type="submit" class="btn" id="submit-btn">Quiero mi oferta</button>
           <p class="legal">Usamos tus datos solo para tasar tu coche y llamarte. Nada de listas ni terceros.</p>
         </form>
@@ -396,6 +406,89 @@ footer a{color:var(--ink-soft)}
       <dt>¿Quién hace el papeleo?</dt>
       <dd>Nosotros. Transferencia, impuesto de circulación y baja si hace falta. Tú firmas y ya está: el coche deja de estar a tu nombre ese mismo día.</dd>
 
+    </dl>
+  </div>
+</section>
+
+<section class="close">
+  <div class="wrap">
+    <h2>Sabes lo que vale en 24 horas</h2>
+    <a href="#lead-form" class="btn">Pedir mi oferta</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    674 48 50 09 · <a href="mailto:info.gestacars@gmail.com">info.gestacars@gmail.com</a>
+  </div>
+</footer>
+
+<script>
+/* ============================================================
+   ENVÍO DEL FORMULARIO
+   Usa FormSubmit (gratis, sin backend). La PRIMERA vez que se
+   envía, FormSubmit manda un email de activación a la dirección:
+   hay que abrirlo y confirmar. Cambia el email si quieres otro.
+   Si prefieres Formspree, Web3Forms o tu propio endpoint, solo
+   hay que tocar la constante ENDPOINT.
+   ============================================================ */
+const ENDPOINT = "https://formsubmit.co/ajax/info.gestacars@gmail.com";
+
+const form   = document.getElementById('lead-form');
+const btn    = document.getElementById('submit-btn');
+const err    = document.getElementById('err');
+const panelF = document.getElementById('panel-form');
+const panelT = document.getElementById('panel-thanks');
+
+form.addEventListener('submit', async function (e) {
+  e.preventDefault();
+
+  if (!form.checkValidity()) { form.reportValidity(); return; }
+
+  btn.disabled = true;
+  btn.textContent = 'Enviando…';
+  err.style.display = 'none';
+
+  const datos = Object.fromEntries(new FormData(form).entries());
+  datos._subject = 'Nuevo lead · venta de coche';
+  datos._template = 'table';
+
+  try {
+    const r = await fetch(ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify(datos)
+    });
+    if (!r.ok) throw new Error('fallo envio');
+
+    /* EVENTO DE CONVERSIÓN — solo cuando el lead ha entrado de verdad */
+    if (window.oaiq) {
+      oaiq("measure", "lead_created", { type: "customer_action" });
+    }
+
+    panelF.style.display = 'none';
+    panelT.style.display = 'block';
+    panelT.scrollIntoView({ block: 'center' });
+
+  } catch (e2) {
+    err.style.display = 'block';
+    btn.disabled = false;
+    btn.textContent = 'Quiero mi oferta';
+  }
+});
+
+/* Clic en WhatsApp = también es un lead. Se mide como evento aparte. */
+document.querySelectorAll('a[href^="https://wa.me/"]').forEach(function (a) {
+  a.addEventListener('click', function () {
+    if (window.oaiq) {
+      oaiq("measure", "custom", { type: "custom" }, { custom_event_name: "whatsapp_click" });
+    }
+  });
+});
+</script>
+
+</body>
+</html>
     </dl>
   </div>
 </section>
