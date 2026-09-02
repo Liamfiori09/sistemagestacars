@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Compramos tu coche en menos de 24h</title>
+<meta name="description" content="Te hacemos una oferta fija por tu coche en menos de 24 horas. Sin rodeos y sin compromiso. Si te encaja, lo compramos y hacemos el papeleo.">
+
+<!-- ============================================================
+     PÍXEL DE OPENAI — base. Va lo más arriba posible del <head>.
+     ============================================================ -->
+<script>
+(function (w, d, s, u) {
+  if (w.oaiq) return;
+  var q = function () { q.q.push(arguments); };
+  q.q = [];
+  w.oaiq = q;
+  var js = d.createElement(s);
+  js.async = true;
+  js.src = u;
+  var f = d.getElementsByTagName(s)[0];
+  f.parentNode.insertBefore(js, f);
+})(window, document, "script", "https://bzrcdn.openai.com/sdk/oaiq.min.js");
+oaiq("init", { pixelId: "NkSBZXnfcpSjv8x6miWzD5" });
+</script>
+
+<!-- OPCIONAL · Google Analytics 4.
+     Si quieres medir este subdominio en una propiedad aparte, cambia el ID.
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-K84K70PQ77"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-K84K70PQ77');
+</script>
+-->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;800&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --ink:#12161F;
+  --ink-soft:#565E6E;
+  --paper:#FFFFFF;
+  --surface:#EEF1F6;
+  --line:#D7DDE6;
+  --plate:#1E3FCE;
+  --plate-dark:#152EA0;
+  --wa:#25D366;
+  --ok:#0F7B4F;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Archivo',system-ui,-apple-system,sans-serif;
+  color:var(--ink);
+  background:var(--paper);
+  line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:1080px;margin:0 auto;padding:0 22px}
+
+/* ---------- barra superior ---------- */
+.topbar{
+  background:var(--ink);
+  color:#fff;
+  font-size:.82rem;
+  letter-spacing:.01em;
+  padding:9px 0;
+}
+.topbar .wrap{display:flex;justify-content:space-between;align-items:center;gap:14px}
+.topbar strong{font-weight:600}
+.topbar a{color:#fff;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.45)}
+
+/* ---------- hero ---------- */
+.hero{padding:52px 0 60px}
+.hero-grid{display:grid;grid-template-columns:1fr 430px;gap:56px;align-items:start}
+
+h1{
+  font-size:clamp(2.3rem,6.2vw,3.6rem);
+  font-weight:800;
+  line-height:1.02;
+  letter-spacing:-.035em;
+  max-width:12ch;
+}
+.lede{
+  margin-top:20px;
+  font-size:1.12rem;
+  color:var(--ink-soft);
+  max-width:42ch;
+}
+.lede b{color:var(--ink);font-weight:600}
+
+.points{margin-top:32px;border-top:1px solid var(--line)}
+.points div{
+  padding:15px 0;
+  border-bottom:1px solid var(--line);
+  display:flex;
+  gap:14px;
+  align-items:baseline;
+  font-size:.98rem;
+}
+.points span{
+  color:var(--plate);
+  font-weight:800;
+  flex:0 0 auto;
+  font-size:1.05rem;
+}
+
+/* ---------- formulario ---------- */
+.form-panel{
+  background:var(--surface);
+  border-left:7px solid var(--plate);
+  padding:28px 26px 26px;
+  position:sticky;
+  top:24px;
+}
+.form-panel h2{
+  font-size:1.28rem;
+  font-weight:700;
+  letter-spacing:-.02em;
+  line-height:1.2;
+}
+.form-panel .sub{
+  margin-top:7px;
+  font-size:.92rem;
+  color:var(--ink-soft);
+}
+form{margin-top:20px;display:grid;gap:13px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+label{display:block;font-size:.83rem;font-weight:500;margin-bottom:5px}
+input,select,textarea{
+  width:100%;
+  font-family:inherit;
+  font-size:1rem;
+  padding:12px 13px;
+  border:1px solid var(--line);
+  background:#fff;
+  color:var(--ink);
+  border-radius:3px;
+}
+input:focus,select:focus,textarea:focus{
+  outline:3px solid rgba(30,63,206,.28);
+  outline-offset:1px;
+  border-color:var(--plate);
+}
+.btn{
+  font-family:inherit;
+  font-size:1.05rem;
+  font-weight:700;
+  letter-spacing:-.01em;
+  padding:15px 18px;
+  border:none;
+  border-radius:3px;
+  cursor:pointer;
+  width:100%;
+  background:var(--plate);
+  color:#fff;
+}
+.btn:hover{background:var(--plate-dark)}
+.btn:disabled{opacity:.6;cursor:wait}
+.legal{font-size:.76rem;color:var(--ink-soft);line-height:1.45}
+.legal a{color:var(--ink-soft)}
+.err{
+  display:none;
+  background:#FDECEC;
+  border-left:4px solid #C0392B;
+  padding:11px 13px;
+  font-size:.88rem;
+}
+.thanks{display:none}
+.thanks h2{font-size:1.3rem;font-weight:700;letter-spacing:-.02em}
+.thanks p{margin-top:10px;font-size:.98rem;color:var(--ink-soft)}
+
+.wa{
+  display:inline-flex;
+  align-items:center;
+  gap:9px;
+  margin-top:18px;
+  background:var(--wa);
+  color:#08301A;
+  font-weight:700;
+  font-size:1rem;
+  text-decoration:none;
+  padding:13px 20px;
+  border-radius:3px;
+}
+.wa svg{width:19px;height:19px;fill:#08301A}
+
+.or{
+  margin-top:16px;
+  padding-top:16px;
+  border-top:1px solid var(--line);
+  font-size:.88rem;
+  color:var(--ink-soft);
+}
+
+/* ---------- pasos ---------- */
+.steps{background:var(--ink);color:#fff;padding:56px 0}
+.steps h2{font-size:1.75rem;font-weight:700;letter-spacing:-.03em;margin-bottom:30px}
+.steps ol{list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:34px;counter-reset:s}
+.steps li{counter-increment:s;padding-top:16px;border-top:2px solid rgba(255,255,255,.25)}
+.steps li::before{
+  content:counter(s);
+  display:block;
+  font-size:.95rem;
+  font-weight:800;
+  color:#8FA6FF;
+  margin-bottom:8px;
+}
+.steps h3{font-size:1.06rem;font-weight:700;margin-bottom:6px}
+.steps p{font-size:.94rem;color:#C3CAD6}
+
+/* ---------- qué compramos ---------- */
+.cases{padding:56px 0}
+.cases h2{font-size:1.75rem;font-weight:700;letter-spacing:-.03em;max-width:20ch}
+.cases > .wrap > p{margin-top:12px;color:var(--ink-soft);max-width:52ch}
+.cases ul{margin-top:28px;list-style:none;display:grid;grid-template-columns:repeat(2,1fr);gap:0 40px}
+.cases li{
+  padding:14px 0;
+  border-bottom:1px solid var(--line);
+  font-size:1rem;
+  display:flex;
+  gap:12px;
+  align-items:baseline;
+}
+.cases li::before{content:"";flex:0 0 auto;width:9px;height:9px;background:var(--plate);border-radius:50%}
+
+/* ---------- dudas ---------- */
+.faq{background:var(--surface);padding:56px 0}
+.faq h2{font-size:1.75rem;font-weight:700;letter-spacing:-.03em;margin-bottom:26px}
+.faq dl{display:grid;gap:22px;max-width:64ch}
+.faq dt{font-weight:700;font-size:1.04rem;margin-bottom:5px}
+.faq dd{color:var(--ink-soft);font-size:.98rem}
+
+/* ---------- cierre ---------- */
+.close{padding:56px 0 20px;text-align:center}
+.close h2{font-size:clamp(1.7rem,4.6vw,2.4rem);font-weight:800;letter-spacing:-.03em;max-width:18ch;margin:0 auto}
+.close .btn{max-width:330px;margin:26px auto 0;display:block;text-decoration:none;text-align:center;line-height:1.3}
+
+footer{padding:26px 0 40px;font-size:.8rem;color:var(--ink-soft);text-align:center}
+footer a{color:var(--ink-soft)}
+
+@media (max-width:880px){
+  .hero-grid{grid-template-columns:1fr;gap:34px}
+  .form-panel{position:static}
+  .steps ol{grid-template-columns:1fr;gap:24px}
+  .cases ul{grid-template-columns:1fr}
+  .hero{padding:36px 0 44px}
+  h1{max-width:none}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="wrap">
+    <strong>Compra directa de vehículos</strong>
+    <span>Barcelona y alrededores · <a href="tel:+34674485009">674 48 50 09</a></span>
+  </div>
+</div>
+
+<section class="hero">
+  <div class="wrap hero-grid">
+
+    <div>
+      <h1>Compramos tu coche en menos de 24h</h1>
+      <p class="lede">Nos dices qué tienes, lo tasamos y te damos <b>una oferta fija</b>. Sin rodeos y sin compromiso. Si te encaja, lo compramos y nos ocupamos del papeleo. Si no, no pasa nada.</p>
+
+      <div class="points">
+        <div><span>1 oferta</span> Un precio cerrado, no una horquilla ni un "ya veremos al verlo".</div>
+        <div><span>0 gestiones</span> Transferencia, impuesto y bajas las hacemos nosotros.</div>
+        <div><span>Pago</span> El mismo día de la entrega, por transferencia.</div>
+      </div>
+    </div>
+
+    <div class="form-panel">
+      <div id="panel-form">
+        <h2>Pide tu oferta</h2>
+        <p class="sub">Un minuto. Te llamamos hoy mismo con un precio.</p>
+
+        <div class="err" id="err">No se ha podido enviar. Prueba otra vez o escríbenos por WhatsApp.</div>
+
+        <form id="lead-form" novalidate>
+          <div>
+            <label for="nombre">Nombre</label>
+            <input type="text" id="nombre" name="nombre" autocomplete="name" required>
+          </div>
+          <div class="row">
+            <div>
+              <label for="telefono">Teléfono</label>
+              <input type="tel" id="telefono" name="telefono" autocomplete="tel" required>
+            </div>
+            <div>
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" autocomplete="email" required>
+            </div>
+          </div>
+          <div>
+            <label for="coche">Marca y modelo</label>
+            <input type="text" id="coche" name="coche" placeholder="Seat Ibiza 1.6 TDI" required>
+          </div>
+          <div class="row">
+            <div>
+              <label for="anio">Año</label>
+              <input type="text" id="anio" name="anio" inputmode="numeric" placeholder="2014" required>
+            </div>
+            <div>
+              <label for="km">Kilómetros</label>
+              <input type="text" id="km" name="km" inputmode="numeric" placeholder="190.000" required>
+            </div>
+          </div>
+          <div>
+            <label for="estado">Estado</label>
+            <select id="estado" name="estado">
+              <option>Funciona bien</option>
+              <option>Tiene alguna avería</option>
+              <option>No arranca</option>
+              <option>Sin ITV en vigor</option>
+            </select>
+          </div>
+          <button type="submit" class="btn" id="submit-btn">Quiero mi oferta</button>
+          <p class="legal">Usamos tus datos solo para tasar tu coche y llamarte. Nada de listas ni terceros.</p>
+        </form>
+
+        <div class="or">¿Prefieres escribir?</div>
+        <a class="wa" href="https://wa.me/34674485009?text=Hola%2C%20quiero%20vender%20mi%20coche" id="wa-top" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24"><path d="M17.5 14.4c-.3-.2-1.7-.9-2-1-.3-.1-.4-.2-.6.1-.2.3-.7.9-.9 1.1-.2.2-.3.2-.6.1-.3-.2-1.2-.5-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6l.5-.5c.1-.2.2-.3.3-.5 0-.2 0-.4 0-.5 0-.2-.6-1.5-.9-2-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2 3.1 4.9 4.3.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.6-.1 1.7-.7 1.9-1.4.2-.7.2-1.3.2-1.4-.1-.1-.3-.2-.6-.3M12 21.5c-1.7 0-3.3-.5-4.7-1.3l-.3-.2-3.5.9.9-3.4-.2-.4c-.9-1.5-1.4-3.2-1.4-4.9 0-5.2 4.2-9.4 9.4-9.4 2.5 0 4.9 1 6.6 2.8 1.8 1.8 2.8 4.1 2.8 6.6-.2 5.2-4.4 9.3-9.6 9.3m8-17.4C17.9 2 15 .8 12 .8 5.8.8.8 5.8.8 12c0 2 .5 3.9 1.5 5.6L.7 23.3l5.8-1.5c1.6.9 3.5 1.4 5.4 1.4 6.2 0 11.2-5 11.2-11.2 0-3-1.2-5.8-3.3-7.9"/></svg>
+          Escribir por WhatsApp
+        </a>
+      </div>
+
+      <div class="thanks" id="panel-thanks">
+        <h2>Recibido. Te llamamos hoy.</h2>
+        <p>Estamos mirando tu coche ahora mismo. Te llamamos al teléfono que nos has dejado con una oferta cerrada, normalmente en menos de 24 horas.</p>
+        <p>Si prefieres adelantar, escríbenos y te contestamos al momento.</p>
+        <a class="wa" href="https://wa.me/34674485009?text=Acabo%20de%20pedir%20una%20oferta%20por%20mi%20coche" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24"><path d="M17.5 14.4c-.3-.2-1.7-.9-2-1-.3-.1-.4-.2-.6.1-.2.3-.7.9-.9 1.1-.2.2-.3.2-.6.1-.3-.2-1.2-.5-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6l.5-.5c.1-.2.2-.3.3-.5 0-.2 0-.4 0-.5 0-.2-.6-1.5-.9-2-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2 3.1 4.9 4.3.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.6-.1 1.7-.7 1.9-1.4.2-.7.2-1.3.2-1.4-.1-.1-.3-.2-.6-.3M12 21.5c-1.7 0-3.3-.5-4.7-1.3l-.3-.2-3.5.9.9-3.4-.2-.4c-.9-1.5-1.4-3.2-1.4-4.9 0-5.2 4.2-9.4 9.4-9.4 2.5 0 4.9 1 6.6 2.8 1.8 1.8 2.8 4.1 2.8 6.6-.2 5.2-4.4 9.3-9.6 9.3m8-17.4C17.9 2 15 .8 12 .8 5.8.8.8 5.8.8 12c0 2 .5 3.9 1.5 5.6L.7 23.3l5.8-1.5c1.6.9 3.5 1.4 5.4 1.4 6.2 0 11.2-5 11.2-11.2 0-3-1.2-5.8-3.3-7.9"/></svg>
+          Escribir por WhatsApp
+        </a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="steps">
+  <div class="wrap">
+    <h2>Cómo va</h2>
+    <ol>
+      <li>
+        <h3>Nos cuentas qué tienes</h3>
+        <p>Marca, modelo, año, kilómetros y cómo está. Con eso ya podemos empezar a tasar.</p>
+      </li>
+      <li>
+        <h3>Te damos un precio</h3>
+        <p>Te llamamos el mismo día con una oferta cerrada. Si hace falta ver el coche, vamos nosotros.</p>
+      </li>
+      <li>
+        <h3>Decides tú</h3>
+        <p>Si te encaja, recogemos el coche, te pagamos y hacemos la transferencia. Si no, ahí queda.</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<section class="cases">
+  <div class="wrap">
+    <h2>Compramos coches que otros no quieren</h2>
+    <p>No hace falta que esté impecable ni que tengas todos los papeles al día. Estos son los casos que más nos llegan.</p>
+    <ul>
+      <li>Con muchos kilómetros</li>
+      <li>Con una avería sin arreglar</li>
+      <li>Heredado, a nombre de un familiar</li>
+      <li>Sin ITV o con la ITV caducada</li>
+      <li>Parado meses sin usar</li>
+      <li>Que llevas tiempo sin poder vender</li>
+      <li>Que necesitas quitarte esta semana</li>
+    </ul>
+  </div>
+</section>
+
+<section class="faq">
+  <div class="wrap">
+    <h2>Lo que suelen preguntarnos</h2>
+    <dl>
+      <dt>¿Me vais a tirar el precio por ser una compraventa?</dt>
+      <dd>Te damos un precio y te explicamos de dónde sale: lo que vale hoy tu modelo, lo que cuesta ponerlo a punto y lo que tardaríamos en venderlo. Vas a cobrar menos que vendiendo a un particular. A cambio cobras esta semana, sin visitas, sin llamadas raras y sin riesgo de impago.</dd>
+
+      <dt>¿Y si no me convence la oferta?</dt>
+      <dd>No compras nada ni firmas nada. Te quedas con la tasación y decides. No insistimos.</dd>
+
+      <dt>¿Quién hace el papeleo?</dt>
+      <dd>Nosotros. Transferencia, impuesto de circulación y baja si hace falta. Tú firmas y ya está: el coche deja de estar a tu nombre ese mismo día.</dd>
+
+    </dl>
+  </div>
+</section>
+
+<section class="close">
+  <div class="wrap">
+    <h2>Sabes lo que vale en 24 horas</h2>
+    <a href="#lead-form" class="btn">Pedir mi oferta</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    674 48 50 09 · <a href="mailto:info.gestacars@gmail.com">info.gestacars@gmail.com</a>
+  </div>
+</footer>
+
+<script>
+/* ============================================================
+   ENVÍO DEL FORMULARIO
+   Usa FormSubmit (gratis, sin backend). La PRIMERA vez que se
+   envía, FormSubmit manda un email de activación a la dirección:
+   hay que abrirlo y confirmar. Cambia el email si quieres otro.
+   Si prefieres Formspree, Web3Forms o tu propio endpoint, solo
+   hay que tocar la constante ENDPOINT.
+   ============================================================ */
+const ENDPOINT = "https://formsubmit.co/ajax/info.gestacars@gmail.com";
+
+const form   = document.getElementById('lead-form');
+const btn    = document.getElementById('submit-btn');
+const err    = document.getElementById('err');
+const panelF = document.getElementById('panel-form');
+const panelT = document.getElementById('panel-thanks');
+
+form.addEventListener('submit', async function (e) {
+  e.preventDefault();
+
+  if (!form.checkValidity()) { form.reportValidity(); return; }
+
+  btn.disabled = true;
+  btn.textContent = 'Enviando…';
+  err.style.display = 'none';
+
+  const datos = Object.fromEntries(new FormData(form).entries());
+  datos._subject = 'Nuevo lead · venta de coche';
+  datos._template = 'table';
+
+  try {
+    const r = await fetch(ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify(datos)
+    });
+    if (!r.ok) throw new Error('fallo envio');
+
+    /* EVENTO DE CONVERSIÓN — solo cuando el lead ha entrado de verdad */
+    if (window.oaiq) {
+      oaiq("measure", "lead_created", { type: "customer_action" });
+    }
+
+    panelF.style.display = 'none';
+    panelT.style.display = 'block';
+    panelT.scrollIntoView({ block: 'center' });
+
+  } catch (e2) {
+    err.style.display = 'block';
+    btn.disabled = false;
+    btn.textContent = 'Quiero mi oferta';
+  }
+});
+
+/* Clic en WhatsApp = también es un lead. Se mide como evento aparte. */
+document.querySelectorAll('a[href^="https://wa.me/"]').forEach(function (a) {
+  a.addEventListener('click', function () {
+    if (window.oaiq) {
+      oaiq("measure", "custom", { type: "custom" }, { custom_event_name: "whatsapp_click" });
+    }
+  });
+});
+</script>
+
+</body>
+</html>
